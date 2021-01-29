@@ -34,7 +34,7 @@ public class Character : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Debug.Log($"Character took {amount} damage.");
+        Debug.Log($"{gameObject.name} took {amount} damage.");
     }
 
     public int GetMeleeAttackBonus()
@@ -51,6 +51,16 @@ public class Character : MonoBehaviour
     public void SetColor(Color color)
     {
         _sprite.color = color;
+    }
+
+    public int GetHealBonus()
+    {
+        return _stats.Mind;
+    }
+
+    public void HealDamage(int amount)
+    {
+        Debug.Log($"{gameObject.name} healed {amount} for damage.");
     }
 }
 

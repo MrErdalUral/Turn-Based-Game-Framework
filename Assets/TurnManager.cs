@@ -33,7 +33,7 @@ public class TurnManager : MonoBehaviour
             character.SetColor(color);
         }
     }
-    
+
     public IEnumerator PlayTurn(Character character)
     {
         SelectedAction = null;
@@ -51,8 +51,10 @@ public class TurnManager : MonoBehaviour
                 HighlightTargets(Color.white);
                 character.SetColor(Color.green);
                 if (SelectedAction == null) return false;
-                HighlightTargets(Color.yellow);
-
+                if (SelectedAction.OnlySelfTarget)
+                    SelectedTargets.Add(CurrentCharacter);
+                else
+                    HighlightTargets(Color.yellow);
                 if (SelectedTargets.Count < 1) return false;
                 HighlightTargets(Color.white);
                 character.SetColor(Color.white);
@@ -74,14 +76,14 @@ public class TurnManager : MonoBehaviour
         Instance = this;
         while (Characters.Length > 0)
         {
-            turnIndex = (turnIndex + 1) % Characters.Length;
             yield return PlayTurn(CurrentCharacter);
+            turnIndex = (turnIndex + 1) % Characters.Length;
         }
     }
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out var hit))
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit))
         {
             var target = hit.transform.GetComponent<Character>();
             if (target != null)
@@ -91,8 +93,8 @@ public class TurnManager : MonoBehaviour
 
     private void AddTarget(Character target)
     {
-        if(SelectedAction == null) return;
-        if(SelectedAction.SelfTarget && target == CurrentCharacter) return;
+        if (SelectedAction == null) return;
+        if (SelectedAction.SelfTarget && target == CurrentCharacter) return;
         SelectedTargets.Add(target);
     }
 }
