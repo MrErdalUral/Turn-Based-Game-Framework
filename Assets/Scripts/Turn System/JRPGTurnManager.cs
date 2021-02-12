@@ -1,29 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class TurnManager : MonoBehaviour
+public class JRPGTurnManager : AbstractTurnManager
 {
-    public static TurnManager Instance;
-    public Character[] Characters;
-    public int turnIndex;
-    public static Character CurrentCharacter => Instance.Characters[Instance.turnIndex];
-
-    private TurnAction _selectedAction;
-    private List<Character> _selectedTargets;
-
-    public TurnAction SelectedAction
-    {
-        get { return _selectedAction; }
-        set { _selectedAction = value; }
-    }
-
-    public List<Character> SelectedTargets
-    {
-        get { return _selectedTargets; }
-        set { _selectedTargets = value; }
-    }
+    public new static JRPGTurnManager Instance => (JRPGTurnManager)AbstractTurnManager.Instance;
+    
 
     public void HighlightTargets(bool value)
     {
@@ -35,7 +17,7 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    public IEnumerator PlayTurn(Character character)
+    protected override IEnumerator PlayTurn(Character character)
     {
         SelectedAction = null;
 
@@ -72,21 +54,7 @@ public class TurnManager : MonoBehaviour
         yield return SelectedAction.InvokeAction(character, SelectedTargets.ToArray());
     }
 
-    IEnumerator Start()
-    {
-        Instance = this;
-        while (Characters.Length > 1)
-        {
-            if (!CurrentCharacter.IsDead)
-            {
-                yield return PlayTurn(CurrentCharacter);
-                yield return new WaitForSeconds(1);
-                if (Characters.Count(m => !m.IsDead) < 2)
-                    break;
-            }
-            turnIndex = (turnIndex + 1) % Characters.Length;
-        }
-    }
+    
 
     void Update()
     {

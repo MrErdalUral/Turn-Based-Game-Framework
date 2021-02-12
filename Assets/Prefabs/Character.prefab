@@ -134,7 +134,9 @@ MonoBehaviour:
   _turnIndicator: {fileID: 8125467433545623572}
   _characterBehaviour: {fileID: 0}
   _actions:
+  - {fileID: 11400000, guid: 1b0d0822bae82d847a296bf135b5287a, type: 2}
   - {fileID: 11400000, guid: 64b7aade8f785e04098c52819450ee35, type: 2}
+  - {fileID: 11400000, guid: 64132b4779ab4f0438fac7837fbc1319, type: 2}
   _stats:
     Name: No Name
     MaxHealth: 10

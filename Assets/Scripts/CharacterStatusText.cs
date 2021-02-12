@@ -14,15 +14,15 @@ public class CharacterStatusText : MonoBehaviour
         {
             case StatusDisplayType.Health:
                 textMesh.text =
-                    $"Health: {TurnManager.CurrentCharacter.CurrentHealth} / {TurnManager.CurrentCharacter.MaxHealth}";
+                    $"Health: {JRPGTurnManager.CurrentCharacter.CurrentHealth} / {JRPGTurnManager.CurrentCharacter.MaxHealth}";
                 break;
             case StatusDisplayType.Magic:
                 textMesh.text =
-                    $"Magic: {TurnManager.CurrentCharacter.CurrentMagic} / {TurnManager.CurrentCharacter.MaxMagic}";
+                    $"Magic: {JRPGTurnManager.CurrentCharacter.CurrentMagic} / {JRPGTurnManager.CurrentCharacter.MaxMagic}";
                 break;
             case StatusDisplayType.Stamina:
                 textMesh.text =
-                    $"Stamina: {TurnManager.CurrentCharacter.CurrentStamina} / {TurnManager.CurrentCharacter.MaxStamina}";
+                    $"Stamina: {JRPGTurnManager.CurrentCharacter.CurrentStamina} / {JRPGTurnManager.CurrentCharacter.MaxStamina}";
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
