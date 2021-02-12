@@ -26,18 +26,18 @@ public class ActionSelection : MonoBehaviour
             button.GetComponent<Image>().color = Color.white;
         }
         //Deselect
-        if (TurnManager.Instance.SelectedAction == Action)
+        if (AbstractTurnManager.Instance.SelectedAction == Action)
         {
-            TurnManager.Instance.SelectedAction = null;
+            AbstractTurnManager.Instance.SelectedAction = null;
             return;
         }
-        TurnManager.Instance.SelectedAction = Action;
+        AbstractTurnManager.Instance.SelectedAction = Action;
         GetComponent<Image>().color = Color.green;
     }
 
     void Update()
     {
-        _notEnoughMagic = TurnManager.CurrentCharacter.CurrentMagic < _action.MagicCost;
+        _notEnoughMagic = AbstractTurnManager.CurrentCharacter.CurrentMagic < _action.MagicCost;
         if (_notEnoughMagic) GetComponent<Image>().color = Color.red;
     }
 }

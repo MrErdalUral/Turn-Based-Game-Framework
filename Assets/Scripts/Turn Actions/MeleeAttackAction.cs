@@ -14,6 +14,8 @@ public class MeleeAttackAction : TurnAction
             //Walk To Character
             var dir = (character.transform.position - target.transform.position).normalized;
             character.transform.DOMove(target.transform.position + dir, 0.5f);
+            character.transform.DOScaleX(Mathf.Sign(target.transform.position.x - character.transform.position.x), 0.1f);
+
             yield return new WaitForSeconds(0.5f);
 
             //Trigger Animation
@@ -26,6 +28,8 @@ public class MeleeAttackAction : TurnAction
         }
         //Return To Original Position
         character.transform.DOMove(pos, 0.5f);
+        character.transform.DOScaleX(Mathf.Sign(pos.x - character.transform.position.x), 0.1f);
+
         yield return new WaitForSeconds(0.5f);
 
         yield return null;
